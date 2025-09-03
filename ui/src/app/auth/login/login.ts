@@ -18,10 +18,10 @@ export class Login {
   onLogin() {
     this.auth.login(this.username, this.password).subscribe({
       next: (res: any) => {
-        //localStorage.setItem('token', res.token);
+        localStorage.setItem('token', res.token);
         this.auth.setLoggedIn(true);
         console.log('Backend response', res);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/hello']);
       },
       error: () => alert('Login Failed')
     });
