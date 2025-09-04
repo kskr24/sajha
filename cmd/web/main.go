@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"sync"
 
@@ -45,7 +44,6 @@ func helloHandler(c echo.Context) error {
 
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Unauthorized"})
 	}
-	fmt.Print("NOOOOOO")
 	return c.JSON(http.StatusOK, map[string]string{
 		"message": "Hello! Authenticated User."})
 }
@@ -57,6 +55,7 @@ func main() {
 				"http://localhost:4200"},
 			AllowMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete}},
 	))
+	e.Use(middleware.Logger())
 	e.POST("/v1/login", loginHandler)
 	e.GET("/v1/users", listUserHandler)
 	e.GET("/v1/hello", helloHandler)
