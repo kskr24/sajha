@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { Auth } from '../auth/auth';
 import { Router } from '@angular/router';
 
@@ -9,16 +9,12 @@ import { Router } from '@angular/router';
   styleUrl: './hello.css'
 })
 export class Hello implements OnInit {
-  message = '';
-  constructor(private auth: Auth, private route: Router) {}
+  message = signal('');
+  constructor(private auth: Auth, private route: Router, private cd: ChangeDetectorRef) {}
   ngOnInit() {
     this.auth.getHello().subscribe({
-      next: (res) => {
-        this.message = res.message;
-      },
-      error: () => {
-        this.message = 'Unauthorized';
-      }
+      next: (res) => this.message.set(res.message),
+      error: () => this.message.set('Unauthorized')
     });
   }
 
