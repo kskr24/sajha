@@ -4,6 +4,17 @@
 
 package db
 
+type Session struct {
+	ID      int64
+	UA      string
+	IP      string
+	UserID  int64
+	Token   string
+	Expires int64
+	Created int64
+	Updated int64
+}
+
 type User struct {
 	ID       int64
 	Name     string
