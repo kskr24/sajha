@@ -4,19 +4,57 @@
 
 package db
 
+import (
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+type Board struct {
+	ID          int32
+	WorkspaceID int32
+	Name        string
+	CreatedAt   pgtype.Timestamp
+}
+
 type Session struct {
 	ID      int64
 	UA      string
 	IP      string
-	UserID  int64
+	UserID  int32
 	Token   string
-	Expires int64
-	Created int64
-	Updated int64
+	Expires pgtype.Timestamp
+	Created pgtype.Timestamp
+	Updated pgtype.Timestamp
+}
+
+type Task struct {
+	ID       int32
+	BoardID  int32
+	Title    string
+	Details  pgtype.Text
+	Status   pgtype.Text
+	Assignee pgtype.Int4
+	CreateAt pgtype.Timestamp
 }
 
 type User struct {
-	ID       int64
+	ID        int32
+	Username  string
+	Email     string
+	Name      string
+	Password  string
+	CreatedAt pgtype.Timestamp
+	UpdatedAt pgtype.Timestamp
+}
+
+type Workspace struct {
+	ID       int32
 	Name     string
-	Password string
+	OwnerID  int32
+	CreateAt pgtype.Timestamp
+}
+
+type WorkspaceMember struct {
+	WorkspaceID int32
+	UserID      int32
+	Role        string
 }

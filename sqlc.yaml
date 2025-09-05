@@ -6,7 +6,7 @@ sql:
     queries:
       - db/queries
     database:
-      uri: "postgres://sajha:passwd@localhost:5432/sajha_dev?sslmode=disable"
+      uri: "postgres://sajha:PASSSWD@localhost:5432/sajha_dev?sslmode=disable"
     gen:
       go:
         package: db

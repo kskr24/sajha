@@ -1,0 +1,16 @@
+<h2>Board: Demo Board</h2>
+<div class="board">
+   
+        @for(col of columns; track col){
+            
+            <div class="column">
+                <h3 class="column-header">{{col.name}}</h3>
+            <div cdkDropList [cdkDropListData]="col.tasks" class="task-list" (cdkDropListDropped)="drop($event)">
+                @for(task of col.tasks; track task){
+                    <div class="task-card" cdkDrag>{{ task }}</div>
+                }
+            </div>
+        </div>
+        }
+    
+</div>
